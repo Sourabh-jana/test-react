@@ -4,14 +4,16 @@ import { DateRangePicker, RangeKeyDict, Range } from "react-date-range";
 import { useState } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { addDays, format, formatISO } from "date-fns";
+import { format, addDays } from "date-fns";
 
 function App() {
   const [dateRange, setDateRange] = useState<Range[]>([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), 7),
+      endDate: addDays(new Date(), -7),
       key: "selection",
+      // color: "primary",
+      showDateDisplay: true,
     },
   ]);
 
@@ -26,7 +28,8 @@ function App() {
         <DateRangePicker
           ranges={dateRange}
           onChange={handleDateRangeChange}
-          // showSelectionPreview={true}
+          maxDate={new Date(Date.now())}
+          minDate={addDays(new Date(), -95)}
           moveRangeOnFirstSelection={false}
           months={2}
           direction="horizontal"
